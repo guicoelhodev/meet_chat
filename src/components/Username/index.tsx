@@ -1,11 +1,32 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { ModalPhotos } from "./ModalPhotos";
+import { userStore } from "src/store/userStore";
 
 interface IUsername {
   isEditable: boolean;
 }
 export const Username: FC<IUsername> = ({ isEditable = false }) => {
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const { userName, id, avatar, handleUserInfo, handleAvatar } = userStore();
+
+  const setInitialInfo = () => {
+    let idLocalStorage = Number(localStorage.getItem("@USER_ID"));
+
+    if (!idLocalStorage) {
+      idLocalStorage = Math.floor(Math.random() * 9000) + 1000;
+
+      handleUserInfo(idLocalStorage, "id");
+    }
+
+    if (!avatar) {
+      handleAvatar("commonAvatar");
+    }
+  };
+
+  useEffect(() => {
+    setInitialInfo();
+  }, []);
 
   return (
     <article className="max-w-xs bg-secondary-blue rounded-md">
@@ -16,11 +37,17 @@ export const Username: FC<IUsername> = ({ isEditable = false }) => {
         disabled={!isEditable}
       >
         <div className="flex gap-2 text-2xl font-medium">
-          <p>my_user</p>
-          <span className="text-primary-cyan">#1234</span>
+          <p>{userName}</p>
+          {id && <span className="text-primary-cyan">{`#${id}`}</span>}
         </div>
         <aside className="w-16 bg-blue-500 aspect-square rounded-full grid place-items-center">
-          <p className="text-lg">AS</p>
+          {avatar && (
+            <img
+              src={avatar}
+              alt="user avatar"
+              className="rounded-full w-full aspect-square object-cover"
+            />
+          )}
         </aside>
       </button>
 
