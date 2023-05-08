@@ -5,16 +5,16 @@ import { getAvatarImage } from "src/data/avatarsList";
 const initalUserInfo: IAttributes = {
   id: Number(localStorage.getItem("@USER_ID")),
   userName: "user",
-  avatar: localStorage.getItem("@USER_IMAGE"),
+  avatar: JSON.parse(localStorage.getItem("@USER_IMAGE")!) as any,
 };
 
 export const userStore = create<IUserStore>((set) => ({
   ...initalUserInfo,
   handleAvatar: (avatarKey) =>
     set((state) => {
-      const image = getAvatarImage(avatarKey).src;
+      const image = getAvatarImage(avatarKey);
 
-      localStorage.setItem("@USER_IMAGE", image);
+      localStorage.setItem("@USER_IMAGE", JSON.stringify(image));
 
       return { ...state, avatar: image };
     }),

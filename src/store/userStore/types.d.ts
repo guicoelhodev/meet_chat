@@ -1,11 +1,14 @@
 import { IAvatarKeys, avatarList } from "src/data/avatarsList";
 
 export type IUserStore = IAttributes & IMethods;
-
+export type IAvatar = {
+  name: keyof typeof avatarList;
+  src: string;
+};
 export type IAttributes = {
   id: number | null;
   userName: string;
-  avatar: string | null;
+  avatar: null | IAvatar;
 };
 
 export type IMethods = {
