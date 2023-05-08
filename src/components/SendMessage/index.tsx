@@ -32,7 +32,7 @@ export const SendMessage: FC<ISendMessage> = ({ onClickFn }) => {
       />
 
       <button
-        className="w-14 bg-inherit aspect-square bg-slate-300 rounded-full grid place-items-center focus:outline-none"
+        className="w-14 bg-inherit aspect-square bg-secondary-blue rounded-full grid place-items-center focus:outline-none"
         onClick={() => {
           onClickFn(message);
         }}
