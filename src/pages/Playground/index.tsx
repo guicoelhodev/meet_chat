@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Username } from "src/components/Username";
+import { SendMessage } from "src/components/SendMessage";
 
 export const Playground: FC = () => {
   return (
@@ -8,7 +8,7 @@ export const Playground: FC = () => {
       className="min-h-screen bg-primary-blue flex flex-col items-center justify-evenly"
     >
       <section className="w-full max-w-2xl">
-        <Username isEditable />
+        <SendMessage onClickFn={(value) => console.log(value)} />
       </section>
     </div>
   );
