@@ -16,7 +16,7 @@ const UserMessageMemo: FC<IUserMessage> = ({ messageContent }) => {
 
   return (
     <article
-      className={`flex gap-4 ${isMyMessage ? "justify-end " : "justify-start"}`}
+      className={`flex gap-4  ${isMyMessage ? "flex-row-reverse" : "flex-row"}`}
     >
       <article className={`w-16 aspect-square`}>
         <img
@@ -31,7 +31,11 @@ const UserMessageMemo: FC<IUserMessage> = ({ messageContent }) => {
           <span className="text-primary-cyan">{`#${messageContent.id}`}</span>
         </article>
 
-        <article className="bg-secondary-blue p-2 rounded-sm">
+        <article
+          className={`bg-secondary-blue p-2 rounded-sm ${
+            isMyMessage ? "self-end" : "self-start"
+          }`}
+        >
           <p>{messageContent.message}</p>
         </article>
       </section>
