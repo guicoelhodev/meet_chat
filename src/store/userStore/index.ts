@@ -1,33 +1,37 @@
 import { create } from "zustand";
+import { createJSONStorage, persist } from "zustand/middleware";
 import { IAttributes, IUserStore } from "./types";
-import { getAvatarImage } from "src/data/avatarsList";
+import { v4 as uuidV4 } from "uuid";
 
 const initalUserInfo: IAttributes = {
-  id: Number(localStorage.getItem("@USER_ID")),
+  id: "",
   userName: "user",
-  avatar: JSON.parse(localStorage.getItem("@USER_IMAGE")!) as any,
+  avatarId: "commonAvatar",
 };
 
-export const userStore = create<IUserStore>((set) => ({
-  ...initalUserInfo,
-  handleAvatar: (avatarKey) =>
-    set((state) => {
-      const image = getAvatarImage(avatarKey);
+export const userStore = create<IUserStore>()(
+  persist(
+    (set, get) => ({
+      ...initalUserInfo,
+      handleUserInfo: (value, type) =>
+        set((state) => {
+          let tmpState = state[type];
+          tmpState = value;
 
-      localStorage.setItem("@USER_IMAGE", JSON.stringify(image));
+          return { ...state, [type]: tmpState };
+        }),
 
-      return { ...state, avatar: image };
+      setUserId: () => {
+        let idStorage = get().id;
+
+        if (idStorage) return;
+        idStorage = String(Math.floor(Math.random() * 9000) + 1000);
+        set({ id: idStorage });
+      },
     }),
-  handleUserInfo: (value, type) =>
-    set((state) => {
-      let { userName, id } = state;
-      if (type === "id") {
-        id = Number(value);
-        localStorage.setItem("@USER_ID", String(value));
-      } else if (type === "userName") {
-        userName = String(value);
-      }
-
-      return { ...state, userName, id };
-    }),
-}));
+    {
+      name: "@user_meetChat",
+      storage: createJSONStorage(() => localStorage),
+    }
+  )
+);

@@ -1,17 +1,11 @@
 import { IAvatarKeys, avatarList } from "src/data/avatarsList";
+import { IUser } from "src/models/user";
 
 export type IUserStore = IAttributes & IMethods;
-export type IAvatar = {
-  name: keyof typeof avatarList;
-  src: string;
-};
-export type IAttributes = {
-  id: number | null;
-  userName: string;
-  avatar: null | IAvatar;
-};
+
+export type IAttributes = IUser;
 
 export type IMethods = {
-  handleAvatar: (avatarKey: IAvatarKeys) => void;
-  handleUserInfo: (value: string | number, type: "id" | "userName") => void;
+  handleUserInfo: (value: string, type: keyof IAttributes) => void;
+  setUserId: () => void;
 };
