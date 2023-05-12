@@ -12,11 +12,11 @@ export const ModalPhotos: FC<IModalPhotos> = ({
   isModalOpen,
   setIsModalOpen,
 }) => {
-  const { handleAvatar, userName, handleUserInfo } = userStore();
+  const { userName, handleUserInfo } = userStore();
   const [inputValue, setInputValue] = useState(userName);
 
   const handleAvatarImg = (avatarName: keyof typeof avatarList) => {
-    handleAvatar(avatarName);
+    handleUserInfo(avatarName, "avatarId");
     return setIsModalOpen(false);
   };
 
@@ -58,8 +58,9 @@ export const ModalPhotos: FC<IModalPhotos> = ({
             />
 
             <span
-              className={`absolute right-2 top-2 text-2xl ${maxCharacters > 0 ? "text-primary-cyan" : "text-red-600"
-                }`}
+              className={`absolute right-2 top-2 text-2xl ${
+                maxCharacters > 0 ? "text-primary-cyan" : "text-red-600"
+              }`}
             >
               {maxCharacters}
             </span>

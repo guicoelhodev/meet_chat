@@ -1,4 +1,4 @@
-import { IMessage } from "src/types/socket-io";
+import { IMessage } from "src/models/chat";
 
 type IPreventDuplicatedMessages = (
   currentMessage: IMessage,
@@ -10,7 +10,7 @@ export const preventDuplicatedMessages: IPreventDuplicatedMessages = (
   messageList
 ) => {
   const arr: IMessage[] = [...messageList, currentMessage];
-  const key: keyof IMessage = "messageId";
+  const key: keyof IMessage = "id";
 
   const uniqueMessageId = [
     ...new Map(arr.map((item) => [item[key], item])).values(),

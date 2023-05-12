@@ -12,7 +12,7 @@ export const SendMessage: FC<ISendMessage> = ({ onClickFn }) => {
   const handleClickEvent = () => {
     onClickFn(message);
 
-    inputRef.current?.blur();
+    //inputRef.current?.blur();
     return setMessage("");
   };
 

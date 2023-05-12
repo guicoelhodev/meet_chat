@@ -1,8 +1,8 @@
-import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
-import { Socket } from "socket.io-client";
-import { IMessage } from "src/types/socket-io";
+import { Dispatch, FC, SetStateAction, useEffect } from "react";
+import { IMessage } from "src/models/chat";
 import { preventDuplicatedMessages } from "src/utils/preventDuplicatedMessages";
 import { UserMessage } from "./UserMessage";
+import { Socket } from "socket.io-client";
 
 interface IChatContent {
   socketConnection: Socket;
@@ -30,12 +30,9 @@ export const ChatContent: FC<IChatContent> = ({
 
   return (
     <section className="w-full rounded-sm  ">
-      <ul className="flex flex-col p-4 gap-4 ">
+      <ul className="flex flex-col p-4 gap-4">
         {chatMessages?.map((messageInfo) => (
-          <UserMessage
-            messageContent={messageInfo}
-            key={messageInfo.messageId}
-          />
+          <UserMessage messageContent={messageInfo} key={messageInfo.id} />
         ))}
       </ul>
     </section>

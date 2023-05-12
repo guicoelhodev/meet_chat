@@ -1,18 +1,16 @@
 import { FC, memo } from "react";
 import { getAvatarImage } from "src/data/avatarsList";
+import { IMessage } from "src/models/chat";
 import { userStore } from "src/store/userStore";
-import { IMessage } from "src/types/socket-io";
 
 interface IUserMessage {
   messageContent: IMessage;
 }
 
 const UserMessageMemo: FC<IUserMessage> = ({ messageContent }) => {
-  console.log(messageContent.imageType);
+  const { id: userId } = userStore();
 
-  const { id } = userStore();
-
-  const isMyMessage = id === messageContent.id;
+  const isMyMessage = userId === messageContent.userId;
 
   return (
     <article
@@ -28,7 +26,7 @@ const UserMessageMemo: FC<IUserMessage> = ({ messageContent }) => {
       <section className="flex flex-col gap-4">
         <article className="flex gap-2 font-bold text-lg">
           <p>{messageContent.userName}</p>
-          <span className="text-primary-cyan">{`#${messageContent.id}`}</span>
+          <span className="text-primary-cyan">{`#${messageContent.userId}`}</span>
         </article>
 
         <article
