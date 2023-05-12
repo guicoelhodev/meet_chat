@@ -1,10 +1,13 @@
 import { avatarList } from "src/data/avatarsList";
+import { Socket } from "socket.io-client";
 
-type IMessage = {
-  id: number;
+export type IMessage = {
+  id: string;
   userName: string;
   message: string;
   createdAt: string;
-  messageId: string;
+  userId: string;
   imageType: keyof typeof avatarList;
 };
+
+export type ISocket = Socket;
