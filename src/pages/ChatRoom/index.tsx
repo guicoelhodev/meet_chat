@@ -13,7 +13,7 @@ export const ChatRoom: FC = () => {
 
   const [chatMessages, setChatMessages] = useState<IMessage[]>([]);
 
-  const socket = io("http://localhost:3000");
+  const socket = io("http://localhost:3001");
 
   const sendMessageToWebsocketServer = (message: string) => {
     if (!userId || !message) return;
@@ -41,26 +41,53 @@ export const ChatRoom: FC = () => {
   }, []);
 
   return (
-    <div className="h-screen bg-primary-blue flex flex-col gap-4 p-4">
-      <header className="flex justify-end items-start">
-        <Username isEditable />
-      </header>
+    // <div className="h-screen bg-primary-blue flex flex-col gap-4 p-4">
+    //   <header className="flex justify-end items-start">
+    //     <Username isEditable />
+    //   </header>
 
-      <main className="flex-1 flex overflow-auto">
-        <ChatContent
-          socketConnection={socket}
-          chatMessages={chatMessages}
-          setChatMessages={setChatMessages}
-        />
-      </main>
+    //   <main className="flex-1 flex overflow-auto">
+    //     <ChatContent
+    //       socketConnection={socket}
+    //       chatMessages={chatMessages}
+    //       setChatMessages={setChatMessages}
+    //     />
+    //   </main>
 
-      <footer>
-        <SendMessage
-          onClickFn={(messageInput) =>
-            sendMessageToWebsocketServer(messageInput)
-          }
-        />
-      </footer>
+    //   <footer>
+    //     <SendMessage
+    //       onClickFn={(messageInput) =>
+    //         sendMessageToWebsocketServer(messageInput)
+    //       }
+    //     />
+    //   </footer>
+    // </div>
+    <div>
+      <div className="h-screen flex flex-col lg:flex-row">
+        <section className="bg-blue-300 flex grow max-w-none lg:max-w-xs">
+          a
+        </section>
+        <section className="bg-blue-500 p-4 pt-8 grow flex flex-col">
+          <main className="flex-1 flex overflow-auto">
+            <ChatContent
+              socketConnection={socket}
+              chatMessages={chatMessages}
+              setChatMessages={setChatMessages}
+            />
+          </main>
+
+          <footer>
+            <SendMessage
+              onClickFn={(messageInput) =>
+                sendMessageToWebsocketServer(messageInput)
+              }
+            />
+          </footer>
+        </section>
+        <section className="hidden bg-blue-300 max-w-xs grow xl:block">
+          c
+        </section>
+      </div>
     </div>
   );
 };

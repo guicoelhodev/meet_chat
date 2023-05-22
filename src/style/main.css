@@ -10,4 +10,9 @@
   h3 {
     @apply text-primary-gray text-2xl;
   }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none; 
+    scrollbar-width: none;
+  }
 }
