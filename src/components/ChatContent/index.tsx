@@ -1,5 +1,5 @@
 import { Dispatch, FC, SetStateAction, useEffect } from "react";
-import { IMessage } from "src/models/chat";
+import { IMessage } from "src/protocols/chat";
 import { preventDuplicatedMessages } from "src/utils/preventDuplicatedMessages";
 import { UserMessage } from "./UserMessage";
 import { Socket } from "socket.io-client";

@@ -1,6 +1,6 @@
 import { FC, memo } from "react";
 import { getAvatarImage } from "src/data/avatarsList";
-import { IMessage } from "src/models/chat";
+import { IMessage } from "src/protocols/chat";
 import { userStore } from "src/store/userStore";
 
 interface IUserMessage {

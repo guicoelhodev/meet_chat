@@ -1,5 +1,4 @@
-import { IAvatarKeys, avatarList } from "src/data/avatarsList";
-import { IUser } from "src/models/user";
+import { IUser } from "src/protocols/user";
 
 export type IUserStore = IAttributes & IMethods;
 

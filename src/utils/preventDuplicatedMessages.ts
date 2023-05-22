@@ -1,4 +1,4 @@
-import { IMessage } from "src/models/chat";
+import { IMessage } from "src/protocols/chat";
 
 type IPreventDuplicatedMessages = (
   currentMessage: IMessage,
