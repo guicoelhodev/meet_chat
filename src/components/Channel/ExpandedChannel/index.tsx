@@ -39,8 +39,15 @@ const mockUsers = [
 
 type IControls = { action: string; icon: any };
 
-export const ExpandedChannel: React.FC<IExpandedChannel> = ({ isOpen }) => {
+export const ExpandedChannel: React.FC<IExpandedChannel> = ({
+  isOpen,
+  setIsOpen,
+}) => {
   const controls: IControls[] = [
+    {
+      action: "get out call",
+      icon: CloseCall,
+    },
     {
       action: "open camera",
       icon: Webcam,
@@ -57,7 +64,10 @@ export const ExpandedChannel: React.FC<IExpandedChannel> = ({ isOpen }) => {
   return (
     <>
       {isOpen ? (
-        <div className="z-20 w-screen h-screen bg-primary-blue bg-opacity-20 backdrop-blur-md fixed grid place-items-center">
+        <div
+          className="z-20 w-screen h-screen bg-primary-blue bg-opacity-20 backdrop-blur-md fixed grid place-items-center"
+          onClick={() => setIsOpen(false)}
+        >
           <section className="bg-secondary-blue w-full max-w-4xl rounded-sm p-8 flex flex-col items-center gap-4 border-red-100 border relative">
             <ul className="w-full grid grid-cols-2 grid-rows-2 gap-4">
               {mockUsers.map((user) => (
@@ -84,14 +94,14 @@ export const ExpandedChannel: React.FC<IExpandedChannel> = ({ isOpen }) => {
                 </button>
               ))}
             </article>
-
+            {/* 
             <button className="absolute top-4 right-4 bg-blue-900 p-4 rounded-full border-slate-100 border-2">
               <img src={CloseCall} className="w-6 h-6" />
-            </button>
+            </button> */}
 
-            <aside className="absolute bg-blue-900 bottom-4 right-8 h-20 aspect-video rounded-md flex items-center justify-center">
+            <aside className="absolute bg-blue-900 bottom-4 right-8 h-20 aspect-video rounded-md grid place-items-center">
               {/* <div className="bg-primary-blue p-8 w-6 h-6 flex items-center justify-center rounded-full"> */}
-              <p>6</p>
+              <p className="text-2xl">6</p>
               {/* </div> */}
             </aside>
           </section>

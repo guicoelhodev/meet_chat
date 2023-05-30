@@ -116,12 +116,20 @@ const fakeUsers: IUser[] = [
   },
 ];
 
+const socket = io("http://10.1.30.22:3003/channel01");
+
+socket.on("connect", () => {
+  console.log("Connected with socket IO server");
+});
+
+socket.on("disconnect", () => {
+  console.log("Disconnected with socket IO server");
+});
+
 export const ChatRoom: FC = () => {
   const { id: userId, userName, avatarId } = userStore();
 
   const [chatMessages, setChatMessages] = useState<IMessage[]>([]);
-
-  const socket = io("http://localhost:3001");
 
   const sendMessageToWebsocketServer = (message: string) => {
     if (!userId || !message) return;

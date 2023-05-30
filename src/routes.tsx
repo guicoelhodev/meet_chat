@@ -16,15 +16,6 @@ const router = createBrowserRouter([
   },
 ]);
 
-const socket = io("http://localhost:3000");
-socket.on("connect", () => {
-  console.log("Connected with socket IO server");
-});
-
-socket.on("disconnect", () => {
-  console.log("Disconnected with socket IO server");
-});
-
 export const RouterProviderComponent = () => {
   const setUserId = userStore((s) => s.setUserId);
 
